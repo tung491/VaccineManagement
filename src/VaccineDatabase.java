@@ -38,15 +38,13 @@ public class VaccineDatabase extends Database {
         return vaccines;
     }
 
-    public void updateInjectedVaccines(List<String> vaccines) {
+    public void updateInjectedVaccines(String vaccineID) {
         try (
                 Connection conn = this.getConnection();
                 ) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_INJECTED_VACCINES_SQL);
-            for (String vaccine : vaccines) {
-                statement.setString(1, vaccine);
-                statement.addBatch();
-            }
+            statement.setString(1, vaccineID);
+            statement.addBatch();
             statement.executeBatch();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -63,7 +61,8 @@ public class VaccineDatabase extends Database {
             while (resultSet.next()) {
                 Vaccine vaccine = new Vaccine(
                         resultSet.getString("id"),
-                        resultSet.getString("batch_id")
+                        resultSet.getString("batch_id"),
+                        resultSet.getBoolean("injected")
                 );
                 vaccines.add(vaccine);
             }
@@ -75,20 +74,6 @@ public class VaccineDatabase extends Database {
 
     public static void main(String[] args) {
         VaccineDatabase vaccineDatabase = new VaccineDatabase();
-//        Generate a UUID
-//        String batch_id = java.util.UUID.randomUUID().toString();
-//        List<String> vaccines = vaccineDatabase.insertVaccines(batch_id, 10);
-//        int count = 0;
-//        List<String> injectedVaccines = new ArrayList<>();
-//        for (String vaccine : vaccines) {
-//            System.out.println(vaccine);
-//            count++;
-//            if (count % 2 == 0) {
-//                injectedVaccines.add(vaccine);
-//            }
-//        }
-//        vaccineDatabase.updateInjectedVaccines(injectedVaccines);
-//    }
         List<Vaccine> vaccines = vaccineDatabase.selectAllVaccines();
         for (Vaccine vaccine : vaccines) {
             System.out.println(vaccine.getId());

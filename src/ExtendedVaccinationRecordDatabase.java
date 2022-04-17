@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtendedVaccinationDatabase extends VaccinationRecordDatabase {
+public class ExtendedVaccinationRecordDatabase extends VaccinationRecordDatabase {
     private static final String SELECT_EXTENDED_VACCINATION_RECORDS = """
             SELECT vr.id, vr.citizen_id, vr.vaccine_id, vr.date, c.name as citizen_name, vb.name as vaccine_name, vb.production_date, vb.expiry_date
             FROM vaccination_record vr
@@ -98,7 +98,7 @@ public class ExtendedVaccinationDatabase extends VaccinationRecordDatabase {
     }
 
     public static void main(String[] args) {
-        ExtendedVaccinationDatabase dao = new ExtendedVaccinationDatabase();
+        ExtendedVaccinationRecordDatabase dao = new ExtendedVaccinationRecordDatabase();
         List<ExtendedVaccinationRecord> records = dao.getExtendedVaccinationRecords();
         for (ExtendedVaccinationRecord record : records) {
             System.out.println(record);

@@ -1,10 +1,20 @@
 public class Vaccine {
     private String id;
     private String batchId;
+    private boolean isInjected;
 
-    public Vaccine(String id, String batch_id) {
+    public Vaccine(String id, String batch_id, boolean isInjected) {
         this.id = id;
         this.batchId = batch_id;
+        this.isInjected = isInjected;
+    }
+
+    public boolean isInjected() {
+        return isInjected;
+    }
+
+    public void setInjected(boolean injected) {
+        isInjected = injected;
     }
 
     public String getId() {
@@ -13,10 +23,6 @@ public class Vaccine {
 
     public String getBatchId() {
         return batchId;
-    }
-
-    public String toString() {
-        return "Vaccine{" + "id=" + id + ", batch_id=" + batchId + '}';
     }
 
     public void setBatchId(String batchId) {

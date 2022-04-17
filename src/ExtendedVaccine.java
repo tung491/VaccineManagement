@@ -9,12 +9,21 @@ public class ExtendedVaccine extends Vaccine {
 
     public ExtendedVaccine(String id, String batch_id, String vaccineName, Date productionDate,
                            Date expirationDate, int interval, boolean injected) {
-        super(id, batch_id);
+        super(id, batch_id, injected);
         this.vaccineName = vaccineName;
         this.productionDate = productionDate;
         this.expirationDate = expirationDate;
         this.interval = interval;
-        this.injected = injected;
+    }
+
+    @Override
+    public String toString() {
+        return "ExtendedVaccine{" +
+                "vaccineName='" + vaccineName + '\'' +
+                ", productionDate=" + productionDate +
+                ", expirationDate=" + expirationDate +
+                ", interval=" + interval +
+                '}';
     }
 
     public boolean isInjected() {

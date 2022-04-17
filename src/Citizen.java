@@ -16,6 +16,15 @@ public class Citizen {
         this.doses = doses;
     }
 
+    @Override
+    public String toString() {
+        return "Citizen{" +
+                "name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", sex='" + sex + '\'' +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

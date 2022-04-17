@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,12 +13,12 @@ public class VaccinationRecordDatabase extends Database {
 
     private static final String SELECT_VACCINATION_RECORD_BY_ID_SQL = SELECT_VACCINATION_RECORDS_SQL + " WHERE vr.id = ?";
 
-    public void insert_vaccination_record(String citizen_id, String vaccine_id, String date) {
+    public void insertVaccinationRecord(String citizen_id, String vaccine_id, java.util.Date date) {
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_VACCINATION_RECORD_SQL);
             preparedStatement.setString(1, citizen_id);
             preparedStatement.setString(2, vaccine_id);
-            preparedStatement.setDate(3, new java.sql.Date(new java.util.Date().getTime()));
+            preparedStatement.setDate(3, new java.sql.Date(date.getTime()));
             preparedStatement.execute();
 
         } catch (SQLException e) {
@@ -25,7 +26,7 @@ public class VaccinationRecordDatabase extends Database {
         }
     }
 
-    public VaccinationRecord get_vaccination_record_by_id(String id) {
+    public VaccinationRecord getVaccinationRecordById(String id) {
         VaccinationRecord vaccinationRecord = null;
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_VACCINATION_RECORD_BY_ID_SQL);
@@ -43,7 +44,7 @@ public class VaccinationRecordDatabase extends Database {
         return vaccinationRecord;
     }
 
-    public List<VaccinationRecord> list_vaccination_record() {
+    public List<VaccinationRecord> listVaccineRecords() {
         List<VaccinationRecord> vaccinationRecords = new java.util.ArrayList<>();
         try (Connection connection = getConnection()) {
             try (java.sql.ResultSet resultSet = connection.prepareStatement(SELECT_VACCINATION_RECORDS_SQL).executeQuery()) {

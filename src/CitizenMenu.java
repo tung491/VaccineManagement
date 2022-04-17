@@ -1,15 +1,13 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Vector;
 
 public class CitizenMenu extends JFrame {
     private JButton listCitizensButton;
     private JButton inputCitizenButton;
     private JPanel CitizenMenu;
+    private JButton inputInjectRecordButton;
+    private JButton listInjectRecordButton;
     private JPanel citizenMenuPanel;
 
     public CitizenMenu() {
@@ -30,6 +28,20 @@ public class CitizenMenu extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 ListCitizen listCitizens = new ListCitizen();
                 listCitizens.setVisible(true);
+            }
+        });
+        inputInjectRecordButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                InputInjectRecord inputInjectRecord = new InputInjectRecord();
+                inputInjectRecord.setVisible(true);
+            }
+        });
+        listInjectRecordButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ListVaccinationRecord listInjectRecord = new ListVaccinationRecord();
+                listInjectRecord.setVisible(true);
             }
         });
     }
