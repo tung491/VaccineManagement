@@ -18,11 +18,9 @@ public class Citizen {
 
     @Override
     public String toString() {
-        return "Citizen{" +
-                "name='" + name + '\'' +
+        return "name='" + name + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", sex='" + sex + '\'' +
-                '}';
+                ", sex='" + sex + '\'';
     }
 
     public String getId() {

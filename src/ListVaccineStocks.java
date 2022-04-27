@@ -9,53 +9,43 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
 
-public class ListCitizen extends JFrame {
-    private JPanel ListCitizenPane;
-    private JTable citizenTable;
-    private JScrollPane scrollPanel;
-    private JPanel FilterPane;
-    private JTextField searchTextField;
+public class ListVaccineStocks extends JFrame {
+    private JPanel listVaccineStockPane;
     private JButton filterButton;
     private JButton exportToFileButton;
+    private JScrollPane scrollPane;
+    private JPanel filterPane;
+    private JTable vaccineStockTable;
+    private JTextField searchTextField;
 
-    public ListCitizen() {
+    public ListVaccineStocks() {
         DefaultTableModel modelTable = new DefaultTableModel();
-        CitizenDatabase citizenDatabase = new CitizenDatabase();
-        List<Citizen> citizens = citizenDatabase.getAllCitizen();
-        modelTable.addColumn("ID");
-        modelTable.addColumn("Name");
-        modelTable.addColumn("Date of Birth");
-        modelTable.addColumn("Sex");
-        modelTable.addColumn("Vaccines");
-        modelTable.addColumn("Vaccine Dose Count");
-        citizenTable.setModel(modelTable);
-        SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
-        for (int i = 0; i < citizens.size(); i++) {
-            Vector<String> row = new Vector<String>();
-            String dateString = spd.format(citizens.get(i).getDateOfBirth());
-            row.add(citizens.get(i).getId());
-            row.add(citizens.get(i).getName());
-            row.add(dateString);
-            row.add(citizens.get(i).getSex());
-            row.add(citizens.get(i).getDoses().toString());
-            row.add(String.valueOf(citizens.get(i).getDoses().size()));
+        VaccineStockDatabase vaccineStockDatabase = new VaccineStockDatabase();
+        List<VaccineStock> vaccineStocks = vaccineStockDatabase.getVaccineStocks();
+        modelTable.addColumn("Vaccine Name");
+        modelTable.addColumn("Amount");
+        vaccineStockTable.setModel(modelTable);
+        for (VaccineStock vaccineStock : vaccineStocks) {
+            Vector<String> row = new Vector<>();
+            row.add(vaccineStock.getName());
+            row.add(String.valueOf(vaccineStock.getAmount()));
             modelTable.addRow(row);
         }
-        citizenTable.setAutoCreateRowSorter(true);
-        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(modelTable);
-        citizenTable.setRowSorter(sorter);
-        scrollPanel.setBounds(0, 0, 800, 600);
-        scrollPanel.setVisible(true);
+        vaccineStockTable.setAutoCreateRowSorter(true);
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<>(modelTable);
+        vaccineStockTable.setRowSorter(sorter);
+        scrollPane.setBounds(0, 0, 800, 600);
+        scrollPane.setVisible(true);
         setSize(800, 600);
         setVisible(true);
-        setContentPane(ListCitizenPane);
+        setContentPane(listVaccineStockPane);
+
         filterButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) {
                 String text = searchTextField.getText();
                 if (text.equals("")) {
                     sorter.setRowFilter(null);
@@ -89,18 +79,18 @@ public class ListCitizen extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 JFileChooser fchoose = new JFileChooser();
-                int option = fchoose.showSaveDialog(ListCitizen.this);
+                int option = fchoose.showSaveDialog(ListVaccineStocks.this);
                 if (option == JFileChooser.APPROVE_OPTION) {
                     String name = fchoose.getSelectedFile().getName();
                     String path = fchoose.getSelectedFile().getParentFile().getPath();
                     File exportFile = new File(path, name + ".tsv");
-                    exportToTSVFile(citizenTable, exportFile);
+                    exportToTSVFile(vaccineStockTable, exportFile);
                 }
 
             }
         });
-    }
 
+    }
     public void exportToTSVFile(JTable table, File file) {
         try {
             TableModel m = table.getModel();
@@ -120,7 +110,5 @@ public class ListCitizen extends JFrame {
             System.out.println(e);
         }
     }
+
 }
-
-
-

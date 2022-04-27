@@ -8,6 +8,7 @@ public class CitizenMenu extends JFrame {
     private JPanel CitizenMenu;
     private JButton inputInjectRecordButton;
     private JButton listInjectRecordButton;
+    private JButton exitButton;
     private JPanel citizenMenuPanel;
 
     public CitizenMenu() {
@@ -42,6 +43,12 @@ public class CitizenMenu extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 ListVaccinationRecord listInjectRecord = new ListVaccinationRecord();
                 listInjectRecord.setVisible(true);
+            }
+        });
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
             }
         });
     }

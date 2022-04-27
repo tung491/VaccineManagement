@@ -1,8 +1,8 @@
-public class StatVaccine {
+public class VaccineStock {
     private String name;
     private int amount;
 
-    public StatVaccine(String name, int amount) {
+    public VaccineStock(String name, int amount) {
         this.name = name;
         this.amount = amount;
     }

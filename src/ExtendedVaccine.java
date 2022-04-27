@@ -18,12 +18,10 @@ public class ExtendedVaccine extends Vaccine {
 
     @Override
     public String toString() {
-        return "ExtendedVaccine{" +
-                "vaccineName='" + vaccineName + '\'' +
+        return "vaccineName='" + vaccineName + '\'' +
                 ", productionDate=" + productionDate +
                 ", expirationDate=" + expirationDate +
-                ", interval=" + interval +
-                '}';
+                ", interval=" + interval ;
     }
 
     public boolean isInjected() {

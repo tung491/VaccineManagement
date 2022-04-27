@@ -30,18 +30,20 @@ public class InputInjectRecord extends JFrame {
         CitizenDatabase citizenDBObj = new CitizenDatabase();
         List<Citizen> citizenList = citizenDBObj.getAllCitizen();
         this.citizens = citizenList;
+        citizenInfo.setText(citizenList.get(0).toString());
         for (Citizen citizen : citizenList) {
             citizenIdBox.addItem(citizen.getId());
-            citizenInfo.setText(citizen.toString());
         }
 
         ExtendedVaccineDatabase vaccineDBObj = new ExtendedVaccineDatabase();
         List<ExtendedVaccine> vaccinationRecordList = vaccineDBObj.getExtendedUnusedVaccines();
+        vaccineInfo.setText(vaccinationRecordList.get(0).toString());
         for (ExtendedVaccine vaccinationRecord : vaccinationRecordList) {
             vaccineIDBox.addItem(vaccinationRecord.getId());
-            vaccineInfo.setText(vaccinationRecord.toString());
         }
         this.vaccines = vaccinationRecordList;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        dateField.setText(sdf.format(new Date()));
 
         submitButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -50,7 +52,6 @@ public class InputInjectRecord extends JFrame {
                 String citizenId = citizenIdBox.getSelectedItem().toString();
                 String vaccineId = vaccineIDBox.getSelectedItem().toString();
                 String date = dateField.getText();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 if (citizenId.equals("") || vaccineId.equals("") || date.equals("")) {
                     if (citizenId.equals("")) {
                         citizenIdBox.setBorder(new LineBorder(Color.RED, 2));
@@ -81,7 +82,11 @@ public class InputInjectRecord extends JFrame {
                 vaccinationRecordDatabase.insertVaccinationRecord(citizenId, vaccineId, dateObj);
                 VaccineDatabase vaccineDatabase = new VaccineDatabase();
                 vaccineDatabase.updateInjectedVaccines(vaccineId);
-                JOptionPane.showMessageDialog(null, "Inserted successfully");
+                citizenIdBox.setSelectedIndex(0);
+                vaccineIDBox.setSelectedIndex(0);
+                dateField.setText("");
+
+                JOptionPane.showMessageDialog(null, "Insert record successfully");
 
             }
         });
@@ -91,7 +96,6 @@ public class InputInjectRecord extends JFrame {
                 String citizenId = citizenIdBox.getSelectedItem().toString();
                 for (Citizen citizen : citizens) {
                     if (citizen.getId().equals(citizenId)) {
-                        System.out.println(citizen.toString());
                         citizenInfo.setText(citizen.toString());
                         break;
                     }
@@ -104,7 +108,6 @@ public class InputInjectRecord extends JFrame {
                 String vaccineId = vaccineIDBox.getSelectedItem().toString();
                 for (Vaccine vaccine : vaccines) {
                     if (vaccine.getId().equals(vaccineId)) {
-                        System.out.println(vaccine.toString());
                         vaccineInfo.setText(vaccine.toString());
                         break;
                     }

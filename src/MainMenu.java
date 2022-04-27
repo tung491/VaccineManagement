@@ -15,17 +15,31 @@ public class MainMenu extends JFrame {
         setTitle("Vaccination Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        statisticButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(null, "Hello, word!");
-            }
-        });
         citizensButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 CitizenMenu citizenMenu = new CitizenMenu();
                 citizenMenu.setVisible(true);
+            }
+        });
+        Warehouse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                WarehouseMenu wareHouseMenu = new WarehouseMenu();
+                wareHouseMenu.setVisible(true);
+            }
+        });
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+            }
+        });
+        statisticButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                StatisticMenu statisticMenu = new StatisticMenu();
+                statisticMenu.setVisible(true);
             }
         });
     }

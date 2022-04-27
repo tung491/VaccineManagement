@@ -22,6 +22,7 @@ public class ExtendedVaccinationRecordDatabase extends VaccinationRecordDatabase
              WHERE vr.citizen_id = ?
             """;
 
+
     public List<ExtendedVaccinationRecord> getExtendedVaccinationRecords() {
         List<ExtendedVaccinationRecord> records = new ArrayList<>();
 
@@ -97,12 +98,5 @@ public class ExtendedVaccinationRecordDatabase extends VaccinationRecordDatabase
         return records;
     }
 
-    public static void main(String[] args) {
-        ExtendedVaccinationRecordDatabase dao = new ExtendedVaccinationRecordDatabase();
-        List<ExtendedVaccinationRecord> records = dao.getExtendedVaccinationRecords();
-        for (ExtendedVaccinationRecord record : records) {
-            System.out.println(record);
-        }
-    }
 }
 
