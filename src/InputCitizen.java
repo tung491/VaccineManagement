@@ -53,6 +53,7 @@ public class InputCitizen extends JFrame {
                 }
                 Date date;
                 try {
+                    sdf.setLenient(false);
                     date = sdf.parse(dateOfBirth);
                 } catch (ParseException ex) {
                     dateOfBirthField.setBorder(new LineBorder(Color.RED, 2));
@@ -64,6 +65,7 @@ public class InputCitizen extends JFrame {
                 NameField.setText("");
                 CitizenIDField.setText("");
                 dateOfBirthField.setText("");
+                sexBox.setSelectedIndex(0);
             }
         });
     }

@@ -73,6 +73,7 @@ public class InputInjectRecord extends JFrame {
                 }
                 java.util.Date dateObj = null;
                 try {
+                    sdf.setLenient(false);
                     dateObj = sdf.parse(date);
                 } catch (ParseException ex) {
                     dateField.setBorder(new LineBorder(Color.RED, 2));
@@ -115,4 +116,5 @@ public class InputInjectRecord extends JFrame {
             }
         });
     }
+
 }

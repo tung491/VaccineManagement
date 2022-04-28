@@ -71,6 +71,7 @@ public class InputVaccineBatch extends JFrame {
 
                 Date productionDate;
                 try {
+                    sdf.setLenient(false);
                     productionDate = sdf.parse(productionDateString);
                 } catch (ParseException ex) {
                     productionDateField.setBorder(new LineBorder(Color.RED, 2));
