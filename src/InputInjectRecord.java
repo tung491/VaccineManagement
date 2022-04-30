@@ -7,10 +7,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class InputInjectRecord extends JFrame {
+public class InputInjectRecord extends InputForm {
     private JComboBox citizenIdBox;
     private JComboBox vaccineIDBox;
     private JFormattedTextField dateField;
@@ -22,7 +23,7 @@ public class InputInjectRecord extends JFrame {
     private List<ExtendedVaccine> vaccines;
 
     public InputInjectRecord() {
-        setSize(800,600);
+        setSize(800, 600);
         setContentPane(inputInjectPanel);
         setVisible(true);
         citizenIdBox.setEditable(true);
@@ -52,37 +53,29 @@ public class InputInjectRecord extends JFrame {
                 String citizenId = citizenIdBox.getSelectedItem().toString();
                 String vaccineId = vaccineIDBox.getSelectedItem().toString();
                 String date = dateField.getText();
-                if (citizenId.equals("") || vaccineId.equals("") || date.equals("")) {
-                    if (citizenId.equals("")) {
-                        citizenIdBox.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        citizenIdBox.setBorder(new JTextField().getBorder());
-                    }
-                    if (vaccineId.equals("")) {
-                        vaccineIDBox.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        vaccineIDBox.setBorder(new JTextField().getBorder());
-                    }
-                    if (date.equals("")) {
-                        dateField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        dateField.setBorder(new JTextField().getBorder());
-                    }
-                    JOptionPane.showMessageDialog(null, "Please fill all the fields");
+                ArrayList<JTextField> fields = new ArrayList<>();
+                fields.add(dateField);
+//                  citizen and vaccine ID boxes always have a valid value, so we don't need to check them
+                boolean ok = checkEmptyFields(fields);
+                if (!ok) {
+                    JOptionPane.showMessageDialog(null, "Please fill in all the fields");
                     return;
                 }
-                java.util.Date dateObj = null;
+
+                java.util.Date dateObj;
                 try {
                     sdf.setLenient(false);
                     dateObj = sdf.parse(date);
                 } catch (ParseException ex) {
                     dateField.setBorder(new LineBorder(Color.RED, 2));
+                    JOptionPane.showMessageDialog(null, "Please enter a valid date");
                     return;
                 }
                 VaccinationRecordDatabase vaccinationRecordDatabase = new VaccinationRecordDatabase();
                 vaccinationRecordDatabase.insertVaccinationRecord(citizenId, vaccineId, dateObj);
                 VaccineDatabase vaccineDatabase = new VaccineDatabase();
                 vaccineDatabase.updateInjectedVaccines(vaccineId);
+
                 citizenIdBox.setSelectedIndex(0);
                 vaccineIDBox.setSelectedIndex(0);
                 dateField.setText("");

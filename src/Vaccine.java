@@ -1,20 +1,20 @@
 public class Vaccine {
-    private String id;
-    private String batchId;
-    private boolean isInjected;
+    String id;
+    String batchId;
+    boolean injected;
 
     public Vaccine(String id, String batch_id, boolean isInjected) {
         this.id = id;
         this.batchId = batch_id;
-        this.isInjected = isInjected;
+        this.injected = isInjected;
     }
 
     public boolean isInjected() {
-        return isInjected;
+        return this.injected;
     }
 
     public void setInjected(boolean injected) {
-        isInjected = injected;
+        this.injected = injected;
     }
 
     public String getId() {

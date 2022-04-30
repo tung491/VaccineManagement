@@ -7,21 +7,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Vector;
 
-public class ListVaccine extends JFrame {
-    private JPanel listVaccinePane;
-    private JButton exportToFieldButton;
-    private JButton filterButton;
-    private JTextField searchField;
-    private JTable vaccineTable;
-    private JScrollPane scrollPane;
-    private JPanel filterPane;
-
+public class ListVaccine extends ListTable {
     public ListVaccine() {
         DefaultTableModel modelTable = new DefaultTableModel();
         ExtendedVaccineDatabase vaccineDatabase = new ExtendedVaccineDatabase();
@@ -33,7 +23,7 @@ public class ListVaccine extends JFrame {
         modelTable.addColumn("Expiration Date");
         modelTable.addColumn("Interval");
         modelTable.addColumn("Injected");
-        vaccineTable.setModel(modelTable);
+        contentTable.setModel(modelTable);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         for (ExtendedVaccine vaccine : vaccines) {
             Vector<String> row = new Vector<>();
@@ -46,18 +36,18 @@ public class ListVaccine extends JFrame {
             row.add(String.valueOf(vaccine.isInjected()));
             modelTable.addRow(row);
         }
-        vaccineTable.setAutoCreateRowSorter(true);
+        contentTable.setAutoCreateRowSorter(true);
         final TableRowSorter<TableModel> sorter = new TableRowSorter<>(modelTable);
-        vaccineTable.setRowSorter(sorter);
+        contentTable.setRowSorter(sorter);
         scrollPane.setBounds(0, 0, 800, 600);
         scrollPane.setVisible(true);
         setSize(800, 600);
         setVisible(true);
-        setContentPane(listVaccinePane);
+        setContentPane(mainPane);
         filterButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String text = searchField.getText();
+                String text = searchTextField.getText();
                 if (text.equals("")) {
                     sorter.setRowFilter(null);
                 } else {
@@ -69,11 +59,11 @@ public class ListVaccine extends JFrame {
                 }
             }
         });
-        searchField.addKeyListener(new KeyAdapter() {
+        searchTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    String text = searchField.getText();
+                    String text = searchTextField.getText();
                     if (text.equals("")) {
                         sorter.setRowFilter(null);
                     } else {
@@ -86,7 +76,8 @@ public class ListVaccine extends JFrame {
                 }
             }
         });
-        exportToFieldButton.addMouseListener(new MouseAdapter() {
+
+        exportToFileButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JFileChooser fchoose = new JFileChooser();
@@ -95,31 +86,10 @@ public class ListVaccine extends JFrame {
                     String name = fchoose.getSelectedFile().getName();
                     String path = fchoose.getSelectedFile().getParentFile().getPath();
                     File exportFile = new File(path, name + ".tsv");
-                    exportToTSVFile(vaccineTable, exportFile);
+                    exportToTSVFile(contentTable, exportFile);
                 }
 
             }
         });
     }
-
-    public void exportToTSVFile(JTable table, File file) {
-        try {
-            TableModel m = table.getModel();
-            FileWriter fw = new FileWriter(file);
-            for (int i = 0; i < m.getColumnCount(); i++) {
-                fw.write(m.getColumnName(i) + "\t");
-            }
-            fw.write("\n");
-            for (int i = 0; i < m.getRowCount(); i++) {
-                for (int j = 0; j < m.getColumnCount(); j++) {
-                    fw.write(m.getValueAt(i, j).toString() + "\t");
-                }
-                fw.write("\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
 }

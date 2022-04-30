@@ -97,6 +97,5 @@ public class ExtendedVaccinationRecordDatabase extends VaccinationRecordDatabase
         }
         return records;
     }
-
 }
 

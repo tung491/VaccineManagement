@@ -5,9 +5,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class InputCitizen extends JFrame {
+public class InputCitizen extends InputForm {
     private JTextField NameField;
     private JTextField CitizenIDField;
     private JFormattedTextField dateOfBirthField;
@@ -32,22 +33,13 @@ public class InputCitizen extends JFrame {
                 String sex = (String) sexBox.getSelectedItem();
 // Check date of birth is in format dd/mm/yyyy
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                if (name.equals("") || citizenID.equals("") || dateOfBirth.equals("")) {
-                    if (name.equals("")) {
-                        NameField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        NameField.setBorder(new JTextField().getBorder());
-                    }
-                    if (citizenID.equals("")) {
-                        CitizenIDField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        CitizenIDField.setBorder(new JTextField().getBorder());
-                    }
-                    if (dateOfBirth.equals("")) {
-                        dateOfBirthField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        dateOfBirthField.setBorder(new JTextField().getBorder());
-                    }
+                ArrayList<JTextField> fields = new ArrayList<>();
+                fields.add(NameField);
+                fields.add(CitizenIDField);
+                fields.add(dateOfBirthField);
+
+                boolean ok = checkEmptyFields(fields);
+                if (!ok) {
                     JOptionPane.showMessageDialog(null, "Please fill in all the fields");
                     return;
                 }
@@ -57,6 +49,7 @@ public class InputCitizen extends JFrame {
                     date = sdf.parse(dateOfBirth);
                 } catch (ParseException ex) {
                     dateOfBirthField.setBorder(new LineBorder(Color.RED, 2));
+                    JOptionPane.showMessageDialog(null, "Please enter date of birth in format dd/mm/yyyy");
                     return;
                 }
                 CitizenDatabase citizenDatabase = new CitizenDatabase();

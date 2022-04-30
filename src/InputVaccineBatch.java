@@ -5,9 +5,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class InputVaccineBatch extends JFrame {
+public class InputVaccineBatch extends InputForm {
     private JTextField vaccineNameField;
     private JTextField batchIdField;
     private JTextField productionDateField;
@@ -36,37 +37,17 @@ public class InputVaccineBatch extends JFrame {
                 String amountString = amountField.getText();
                 // Input validation
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                if (vaccineName.equals("") || batchId.equals("") || productionDateString.equals("") || expiryDateString.equals("") || intervalString.equals("")) {
-                    if (vaccineName.equals("")) {
-                        vaccineNameField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        vaccineNameField.setBorder(new JTextField().getBorder());
-                    }
-                    if (batchId.equals("")) {
-                        batchIdField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        batchIdField.setBorder(new JTextField().getBorder());
-                    }
-                    if (productionDateString.equals("")) {
-                        productionDateField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        productionDateField.setBorder(new JTextField().getBorder());
-                    }
-                    if (expiryDateString.equals("")) {
-                        expiryDateField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        expiryDateField.setBorder(new JTextField().getBorder());
-                    }
-                    if (intervalString.equals("")) {
-                        intervalField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        intervalField.setBorder(new JTextField().getBorder());
-                    }
-                    if (amountString.equals("")) {
-                        amountField.setBorder(new LineBorder(Color.RED, 2));
-                    } else {
-                        amountField.setBorder(new JTextField().getBorder());
-                    }
+                ArrayList<JTextField> fields = new ArrayList<>();
+                fields.add(vaccineNameField);
+                fields.add(batchIdField);
+                fields.add(productionDateField);
+                fields.add(expiryDateField);
+                fields.add(intervalField);
+                fields.add(amountField);
+                boolean ok = checkEmptyFields(fields);
+                if (!ok) {
+                    JOptionPane.showMessageDialog(null, "Please fill in all fields");
+                    return;
                 }
 
                 Date productionDate;

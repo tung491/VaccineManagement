@@ -5,7 +5,6 @@ public class ExtendedVaccine extends Vaccine {
     private Date productionDate;
     private Date expirationDate;
     private int interval;
-    private boolean injected;
 
     public ExtendedVaccine(String id, String batch_id, String vaccineName, Date productionDate,
                            Date expirationDate, int interval, boolean injected) {
@@ -25,7 +24,7 @@ public class ExtendedVaccine extends Vaccine {
     }
 
     public boolean isInjected() {
-        return injected;
+        return this.injected;
     }
 
     public void setInjected(boolean injected) {
@@ -33,7 +32,7 @@ public class ExtendedVaccine extends Vaccine {
     }
 
     public String getVaccineName() {
-        return vaccineName;
+        return this.vaccineName;
     }
 
     public void setVaccineName(String vaccineName) {
@@ -41,7 +40,7 @@ public class ExtendedVaccine extends Vaccine {
     }
 
     public Date getProductionDate() {
-        return productionDate;
+        return this.productionDate;
     }
 
     public void setProductionDate(Date productionDate) {
@@ -49,7 +48,7 @@ public class ExtendedVaccine extends Vaccine {
     }
 
     public Date getExpirationDate() {
-        return expirationDate;
+        return this.expirationDate;
     }
 
     public void setExpirationDate(Date expirationDate) {
@@ -57,7 +56,7 @@ public class ExtendedVaccine extends Vaccine {
     }
 
     public int getInterval() {
-        return interval;
+        return this.interval;
     }
 
     public void setInterval(int interval) {

@@ -74,9 +74,6 @@ public class VaccineDatabase extends Database {
 
     public static void main(String[] args) {
         VaccineDatabase vaccineDatabase = new VaccineDatabase();
-        List<Vaccine> vaccines = vaccineDatabase.selectAllVaccines();
-        for (Vaccine vaccine : vaccines) {
-            System.out.println(vaccine.getId());
-        }
+        vaccineDatabase.updateInjectedVaccines("61bba5f5-10ad-4583-9c5c-dda90c804bba");
     }
 }

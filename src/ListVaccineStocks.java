@@ -7,41 +7,31 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-public class ListVaccineStocks extends JFrame {
-    private JPanel listVaccineStockPane;
-    private JButton filterButton;
-    private JButton exportToFileButton;
-    private JScrollPane scrollPane;
-    private JPanel filterPane;
-    private JTable vaccineStockTable;
-    private JTextField searchTextField;
-
+public class ListVaccineStocks extends ListTable {
     public ListVaccineStocks() {
         DefaultTableModel modelTable = new DefaultTableModel();
         VaccineStockDatabase vaccineStockDatabase = new VaccineStockDatabase();
         List<VaccineStock> vaccineStocks = vaccineStockDatabase.getVaccineStocks();
         modelTable.addColumn("Vaccine Name");
         modelTable.addColumn("Amount");
-        vaccineStockTable.setModel(modelTable);
+        contentTable.setModel(modelTable);
         for (VaccineStock vaccineStock : vaccineStocks) {
             Vector<String> row = new Vector<>();
             row.add(vaccineStock.getName());
             row.add(String.valueOf(vaccineStock.getAmount()));
             modelTable.addRow(row);
         }
-        vaccineStockTable.setAutoCreateRowSorter(true);
+        contentTable.setAutoCreateRowSorter(true);
         final TableRowSorter<TableModel> sorter = new TableRowSorter<>(modelTable);
-        vaccineStockTable.setRowSorter(sorter);
+        contentTable.setRowSorter(sorter);
         scrollPane.setBounds(0, 0, 800, 600);
         scrollPane.setVisible(true);
         setSize(800, 600);
         setVisible(true);
-        setContentPane(listVaccineStockPane);
+        setContentPane(contentTable);
 
         filterButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -83,32 +73,12 @@ public class ListVaccineStocks extends JFrame {
                 if (option == JFileChooser.APPROVE_OPTION) {
                     String name = fchoose.getSelectedFile().getName();
                     String path = fchoose.getSelectedFile().getParentFile().getPath();
-                    File exportFile = new File(path, name + ".tsv");
-                    exportToTSVFile(vaccineStockTable, exportFile);
+                    File exportFile = new File(path, name + ".csv");
+                    exportToTSVFile(contentTable, exportFile);
                 }
 
             }
         });
 
     }
-    public void exportToTSVFile(JTable table, File file) {
-        try {
-            TableModel m = table.getModel();
-            FileWriter fw = new FileWriter(file);
-            for (int i = 0; i < m.getColumnCount(); i++) {
-                fw.write(m.getColumnName(i) + "\t");
-            }
-            fw.write("\n");
-            for (int i = 0; i < m.getRowCount(); i++) {
-                for (int j = 0; j < m.getColumnCount(); j++) {
-                    fw.write(m.getValueAt(i, j).toString() + "\t");
-                }
-                fw.write("\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
 }

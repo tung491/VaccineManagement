@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ExtendedVaccineDatabase extends Database {
     private static final String SELECT_EXTENDED_VACCINE = """
-            SELECT v.id, v.batch_id, v.injected, vb.name, vb.production_date, vb.expiry_date, vb.interval
+            SELECT v.id, v.batch_id, v.injected as injected, vb.name, vb.production_date, vb.expiry_date, vb.interval
             FROM vaccine v
             JOIN vaccine_batch vb ON v.batch_id = vb.id
             """;
@@ -73,7 +73,7 @@ public class ExtendedVaccineDatabase extends Database {
                         resultSet.getDate("production_date"),
                         resultSet.getDate("expiry_date"),
                         resultSet.getInt("interval"),
-                        resultSet.getBoolean("injected")
+                        Boolean.parseBoolean(resultSet.getString("injected"))
                 );
             }
         } catch (SQLException e) {
@@ -84,9 +84,7 @@ public class ExtendedVaccineDatabase extends Database {
 
     public static void main(String[] args) {
         ExtendedVaccineDatabase extendedVaccineDatabase = new ExtendedVaccineDatabase();
-        List<ExtendedVaccine> extendedVaccines = extendedVaccineDatabase.getExtendedUnusedVaccines();
-        for (ExtendedVaccine extendedVaccine : extendedVaccines) {
-            System.out.println(extendedVaccine.getProductionDate());
-        }
+        ExtendedVaccine extendedVaccine = extendedVaccineDatabase.getExtendedVaccineById("608ea42f-af13-462e-9758-c93f91a1119f");
+
     }
 }

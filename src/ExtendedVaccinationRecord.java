@@ -16,7 +16,7 @@ public class ExtendedVaccinationRecord extends VaccinationRecord {
     }
 
     public String getCitizenName() {
-        return citizenName;
+        return this.citizenName;
     }
 
     public void setCitizenName(String citizenName) {
@@ -24,7 +24,7 @@ public class ExtendedVaccinationRecord extends VaccinationRecord {
     }
 
     public String getVaccineName() {
-        return vaccineName;
+        return this.vaccineName;
     }
 
     public void setVaccineName(String vaccineName) {
@@ -32,7 +32,7 @@ public class ExtendedVaccinationRecord extends VaccinationRecord {
     }
 
     public Date getProductionDate() {
-        return productionDate;
+        return this.productionDate;
     }
 
     public void setProductionDate(Date productionDate) {
@@ -40,7 +40,7 @@ public class ExtendedVaccinationRecord extends VaccinationRecord {
     }
 
     public Date getExpiryDate() {
-        return expiryDate;
+        return this.expiryDate;
     }
 
     public void setExpiryDate(Date expiryDate) {
