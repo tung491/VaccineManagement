@@ -31,7 +31,7 @@ public class ListVaccineStocks extends ListTable {
         scrollPane.setVisible(true);
         setSize(800, 600);
         setVisible(true);
-        setContentPane(contentTable);
+        setContentPane(mainPane);
 
         filterButton.addMouseListener(new MouseAdapter() {
             @Override

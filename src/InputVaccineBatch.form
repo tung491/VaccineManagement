@@ -53,7 +53,7 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Production Date"/>
+          <text value="Production Date (dd/mm/yyyy)"/>
         </properties>
       </component>
       <component id="f6f08" class="javax.swing.JLabel">
@@ -61,7 +61,7 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Expiry Date"/>
+          <text value="Expiry Date (dd/mm/yyyy)"/>
         </properties>
       </component>
       <component id="24098" class="javax.swing.JLabel">

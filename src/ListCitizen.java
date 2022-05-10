@@ -20,7 +20,7 @@ public class ListCitizen extends ListTable {
         modelTable.addColumn("Name");
         modelTable.addColumn("Date of Birth");
         modelTable.addColumn("Sex");
-        modelTable.addColumn("Vaccines");
+        modelTable.addColumn("Vaccine IDs");
         modelTable.addColumn("Vaccine Dose Count");
         contentTable.setModel(modelTable);
         SimpleDateFormat spd = new SimpleDateFormat("dd/MM/yyyy");
