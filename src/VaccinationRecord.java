@@ -1,10 +1,10 @@
 import java.util.Date;
 
 public class VaccinationRecord {
-    private String id;
-    private String citizenId;
-    private String vaccineId;
-    private Date date;
+    protected String id;
+    protected String citizenId;
+    protected String vaccineId;
+    protected Date date;
 
     public VaccinationRecord(String id, String citizenId, String vaccineId, Date date) {
         this.id = id;

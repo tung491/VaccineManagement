@@ -1,7 +1,7 @@
 public class Vaccine {
-    String id;
-    String batchId;
-    boolean injected;
+    protected String id;
+    protected String batchId;
+    protected boolean injected;
 
     public Vaccine(String id, String batch_id, boolean isInjected) {
         this.id = id;
