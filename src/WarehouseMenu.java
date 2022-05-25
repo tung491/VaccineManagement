@@ -15,6 +15,7 @@ public class WarehouseMenu extends JFrame {
         setTitle("Warehouse Menu");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        setLocationRelativeTo(null);
         inputVaccineInformationButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

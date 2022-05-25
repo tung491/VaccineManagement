@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class ExtendedVaccine extends Vaccine {
     private String vaccineName;
@@ -17,9 +18,10 @@ public class ExtendedVaccine extends Vaccine {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return "vaccineName='" + vaccineName + '\'' +
-                ", productionDate=" + productionDate +
-                ", expirationDate=" + expirationDate +
+                ", productionDate=" + sdf.format(productionDate) +
+                ", expirationDate=" + sdf.format(expirationDate) +
                 ", interval=" + interval ;
     }
 

@@ -43,6 +43,7 @@ public class ListCitizen extends ListTable {
         setSize(800, 600);
         setVisible(true);
         setContentPane(mainPane);
+        setLocationRelativeTo(null);
         filterButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

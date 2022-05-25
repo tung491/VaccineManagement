@@ -24,6 +24,7 @@ public class InputVaccineBatch extends InputForm {
         setTitle("Input Vaccine Batch");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        setLocationRelativeTo(null);
         submitButton.addMouseListener(new MouseAdapter() {
 
             @Override

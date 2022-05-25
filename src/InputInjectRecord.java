@@ -26,6 +26,7 @@ public class InputInjectRecord extends InputForm {
         setSize(800, 600);
         setContentPane(inputInjectPanel);
         setVisible(true);
+        setLocationRelativeTo(null);
         citizenIdBox.setEditable(true);
         Component component = citizenIdBox.getEditor().getEditorComponent();
         CitizenDatabase citizenDBObj = new CitizenDatabase();

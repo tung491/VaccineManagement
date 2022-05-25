@@ -14,6 +14,7 @@ public class StatisticMenu extends JFrame {
         setTitle("Statistic Menu");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        setLocationRelativeTo(null);
 
         vaccineStockStatisticButton.addMouseListener(new MouseAdapter() {
             @Override

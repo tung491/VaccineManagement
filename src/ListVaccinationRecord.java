@@ -45,6 +45,7 @@ public class ListVaccinationRecord extends ListTable {
         scrollPane.setBounds(0, 0, 800, 600);
         scrollPane.setVisible(true);
         setContentPane(mainPane);
+        setLocationRelativeTo(null);
         setSize(800, 600);
         filterButton.addMouseListener(new MouseAdapter() {
             @Override

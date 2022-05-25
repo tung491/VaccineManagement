@@ -13,6 +13,7 @@ public class MainMenu extends JFrame {
         setContentPane(mainMenuPanel);
         setSize(500, 500);
         setTitle("Vaccination Management System");
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         citizensButton.addMouseListener(new MouseAdapter() {

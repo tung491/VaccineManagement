@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class InputCitizen extends InputForm {
     private JTextField NameField;
@@ -24,6 +25,7 @@ public class InputCitizen extends InputForm {
 
         setSize(500, 500);
         setVisible(true);
+        setLocationRelativeTo(null);
         Submit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -43,6 +45,23 @@ public class InputCitizen extends InputForm {
                     JOptionPane.showMessageDialog(null, "Please fill in all the fields");
                     return;
                 }
+                CitizenDatabase citizenDatabase = new CitizenDatabase();
+                List<Citizen> citizens = citizenDatabase.getAllCitizen();
+//              Validate citizenID is unique
+                boolean isUnique = true;
+                for (Citizen citizen : citizens) {
+                    if (citizen.getId().equals(citizenID)) {
+                        isUnique = false;
+                        break;
+                    }
+                }
+                if (!isUnique) {
+                    JOptionPane.showMessageDialog(null, "Citizen ID is not unique");
+                    CitizenIDField.setBorder(new LineBorder(Color.RED, 2));
+                    return;
+                } else {
+                    CitizenIDField.setBorder(new JTextField().getBorder());
+                }
                 Date date;
                 try {
                     sdf.setLenient(false);
@@ -52,7 +71,6 @@ public class InputCitizen extends InputForm {
                     JOptionPane.showMessageDialog(null, "Please enter date of birth in format dd/mm/yyyy");
                     return;
                 }
-                CitizenDatabase citizenDatabase = new CitizenDatabase();
                 citizenDatabase.insertCitizen(citizenID, name, date, sex);
                 JOptionPane.showMessageDialog(null, "Add citizen successfully");
                 NameField.setText("");

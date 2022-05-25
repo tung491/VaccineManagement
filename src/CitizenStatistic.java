@@ -24,6 +24,7 @@ public class CitizenStatistic extends JFrame {
         ((PiePlot) chart.getPlot()).setLabelGenerator(labelGenerator);
         ChartPanel chartPanel = new ChartPanel(chart);
         setContentPane(chartPanel);
+        setLocationRelativeTo(null);
         setSize(800, 600);
     }
 

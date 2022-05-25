@@ -16,6 +16,7 @@ public class CitizenMenu extends JFrame {
         setTitle("Citizen Menu");
         setSize(400, 400);
         setVisible(true);
+        setLocationRelativeTo(null);
         inputCitizenButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Citizen {
@@ -18,8 +19,9 @@ public class Citizen {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return "name='" + name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfBirth=" + sdf.format(dateOfBirth) +
                 ", sex='" + sex + '\'';
     }
 
